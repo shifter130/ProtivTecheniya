@@ -22,7 +22,10 @@ namespace ProtivTecheniya.Questionator
                     {
                         continue;
                     }
-                    string[] parts = resolvingquestion.Split(new string[] { "///" }, StringSplitOptions.None);
+                    // лооол я только сейчас понял что разделитель - лого телеканала дождь. заказали рекламу гыгы
+                    // нууу мне лень переделывать вопросы (да можно через найти и заменить ну и что?), так шо пока так и будет))
+                    // плюс ещё совместимость поломается (ещё одна отговорочка, да-да)
+                    string[] parts = resolvingquestion.Split(new string[] { "///" }, StringSplitOptions.None); 
                     questions.Add(new StructModel.Question(parts[0], parts[1], parts[2]));
                     totalquestions++;
                 }

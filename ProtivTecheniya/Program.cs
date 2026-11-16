@@ -16,6 +16,12 @@ namespace ProtivTecheniya
             Console.WriteLine("Загрузка вопросов...");
             int totalq = loader.LoadQuestions();
             Console.WriteLine("ЗАГРУЖЕНО ВОПРОСОВ: " + totalq);
+            Console.WriteLine("Загрузка конфигурации...");
+            Configurator configurator = new Configurator();
+            configurator.Read("cfgdbg");
+            configurator.Write("moo", "cow");
+            configurator.Write("moo", "nonono");
+            configurator.OverrideWrite("moo", "sixSeven");
             int i = 0;
             while (i < 5) {
                 Console.BackgroundColor = ConsoleColor.DarkRed;
