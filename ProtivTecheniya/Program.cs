@@ -11,17 +11,22 @@ namespace ProtivTecheniya
     {
         public static void Main(string[] args)
         {
-            Console.Title = "Против Течения - порт телеигры с РТС.Медиа";
             Loader loader = new Loader();
+            Configurator configurator = new Configurator();
+            Console.Title = "Против Течения - порт телеигры с РТС.Медиа";
             Console.WriteLine("Загрузка вопросов...");
             int totalq = loader.LoadQuestions();
             Console.WriteLine("ЗАГРУЖЕНО ВОПРОСОВ: " + totalq);
             Console.WriteLine("Загрузка конфигурации...");
-            Configurator configurator = new Configurator();
-            configurator.Read("cfgdbg");
-            configurator.Write("moo", "cow");
-            configurator.Write("moo", "nonono");
-            configurator.OverrideWrite("moo", "sixSeven");
+            // TODO: догадайтесь с трёх раз
+            if (configurator.Read("skipmenu") == "1")
+            {
+                if (!args.Contains("/noskip"))
+                {
+                    GameManager gamemanager = new GameManager(loader);
+                    gamemanager.LetTheFlamesBegin();
+                }
+            }
             int i = 0;
             while (i < 5) {
                 Console.BackgroundColor = ConsoleColor.DarkRed;
@@ -46,6 +51,7 @@ namespace ProtivTecheniya
                 Console.WriteLine("1. Начать игру");
                 Console.WriteLine("2. Выйти");
                 Console.WriteLine("3. Рекорды");
+                Console.WriteLine("4. Настройки (Config.txt)");
                 Console.Write("Ваш выбор: ");
                 var choice = Console.ReadLine();
                 switch (choice) { 
@@ -59,10 +65,38 @@ namespace ProtivTecheniya
                     case "3":
                         ReadRecords();
                         break;
+                    case "4":
+                        SettingSelected();
+                        break;
                     default:
                         continue;
                 }
             }
+        }
+
+        static void SettingSelected() {
+            Configurator configurator = new Configurator();
+            Console.WriteLine("==============НАСТРОЙКИ==============");
+            Console.WriteLine("Введите номер параметра для изменения.");
+            Console.WriteLine("1. Пропуск игрового меню при запуске (skipmenu) - " + configurator.Read("skipmenu"));
+            Console.WriteLine("2. Вернуться");
+            Console.Write("Ваш выбор: ");
+            var choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    Console.Write("Введите значение (1 либо 0): ");
+                    var InputVal = Console.ReadLine();
+                    configurator.OverrideWrite("skipmenu", InputVal);
+                    Console.WriteLine("Надеюсь, записалось!");
+                    return;
+                case "2":
+                    Console.WriteLine("Неправильный выбор, возвращаюсь в игровое меню...");
+                    return;
+                default:
+                    break;
+            }
+            return;
         }
 
         static void ReadRecords() {

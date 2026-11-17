@@ -50,8 +50,7 @@ namespace ProtivTecheniya
                     Console.WriteLine("Игра окончена!!!");
                     Console.WriteLine("Вы проиграли!!!");
                     Console.WriteLine("Возвращаемся в главное меню...");
-                    string[] emptyArgs = new string[0];
-                    Program.Main(emptyArgs);
+                    Program.Main(new string[] { "/noskip" });
                     break;
                 }
                 int friendlyCq = cq + 1;
@@ -79,13 +78,13 @@ namespace ProtivTecheniya
                 {
                     File.AppendAllText("records.txt", cookedstring, Encoding.UTF8);
                     bankandtimer.Abort();
-                    return;
+                    Program.Main(new string[] { "/noskip" });
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Возникла проблема при сохранении рекорда: " + ex.Message);
                     bankandtimer.Abort();
-                    return;
+                    Program.Main(new string[] { "/noskip" });
                 }
             }
             else {
@@ -98,13 +97,13 @@ namespace ProtivTecheniya
                 {
                     File.AppendAllText("records.txt", cookedstring, Encoding.UTF8);
                     bankandtimer.Abort();
-                    return;
+                    Program.Main(new string[] { "/noskip" });
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Возникла проблема при сохранении рекорда: " + ex.Message);
                     bankandtimer.Abort();
-                    return;
+                    Program.Main(new string[] { "/noskip" });
                 }
             }
         }

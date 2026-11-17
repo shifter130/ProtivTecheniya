@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProtivTecheniya
 {
-    class RulesetMgr
+    class Rulesetator
     {
         
     }

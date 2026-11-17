@@ -59,7 +59,9 @@ namespace ProtivTecheniya
                 string[] parts = line.Split(new string[] { "=" }, StringSplitOptions.None);
                 if (parts[0] == key)
                 {
+#if DEBUG
                     Console.WriteLine("Ключ уже записан: используйте OverrideWrite для перезаписи!");
+#endif
                     return;
                 }
             }
@@ -80,7 +82,6 @@ namespace ProtivTecheniya
                 File.Create("Config.txt");
             }
             string[] cfgLines = File.ReadAllLines("Config.txt", Encoding.UTF8);
-            Console.WriteLine(cfgLines[0]);
             foreach (string line in cfgLines)
             {
                 if (line.StartsWith("//") || line == "")
