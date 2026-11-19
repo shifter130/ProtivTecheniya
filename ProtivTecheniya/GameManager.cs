@@ -31,7 +31,7 @@ namespace ProtivTecheniya
         public void LetTheFlamesBegin() {
             Console.Clear();
             // Console.WriteLine("Вот, я хз как асинхронный таймер 150 секунд завести так шо придётся потоки юзать((");
-            Console.WriteLine("Правила прочитайте в текстовом файлике Rules.txt. Как только прочитаете - нажмите любую кнопку.");
+            Console.WriteLine("Ознакомьтесь с файлами в мануале readme.pdf (согласно выбранному рулсету!). Как только прочитаете - нажмите любую кнопку.");
             Console.ReadKey();
             int qi = loader.questions.Count;
             while (qi > 1)
@@ -70,7 +70,7 @@ namespace ProtivTecheniya
             }
             if (JackpotFlag == true)
             {
-                Console.WriteLine("Поздравляем! Вы выиграли джекпот: 250 рублей!");
+                Console.WriteLine("Поздравляем! Вы выиграли джекпот: " + Rulesetator.jackpot + " рублей!");
                 Console.WriteLine("Ввведите ваше имя, и мы запишем вас в текстовый файл рекордов!");
                 string username = Console.ReadLine();
                 string cookedstring = DateTime.Now.ToString("dd-MM-yyyy HH:mm") + " >> " + username + " >> ДЖЕКПОТ! 250 РУБЛЕЙ!" + Environment.NewLine;
@@ -128,12 +128,12 @@ namespace ProtivTecheniya
         }
 
         void TimerAndBank() {
-            for (int firstTimer = 150; firstTimer != 0; firstTimer--) {
+            for (int firstTimer = Rulesetator.firstTimer; firstTimer != 0; firstTimer--) {
                 Thread.Sleep(1000);
                 Console.Title = "Осталось " + firstTimer + " секунд.";
             }
             JackpotFlag = false;
-            for (secondTimer = 150; secondTimer != -1; secondTimer--)
+            for (secondTimer = Rulesetator.ostatok; secondTimer != -1; secondTimer -= Rulesetator.decrspeed)
             {
                 Thread.Sleep(1000);
                 Console.Title = "БАНК: " + secondTimer + " рублей!";

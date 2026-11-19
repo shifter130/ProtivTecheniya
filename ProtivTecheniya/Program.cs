@@ -18,7 +18,7 @@ namespace ProtivTecheniya
             int totalq = loader.LoadQuestions();
             Console.WriteLine("ЗАГРУЖЕНО ВОПРОСОВ: " + totalq);
             Console.WriteLine("Загрузка конфигурации...");
-            // TODO: догадайтесь с трёх раз
+            Rulesetator.RestoreRuleset();
             if (configurator.Read("skipmenu") == "1")
             {
                 if (!args.Contains("/noskip"))
@@ -79,7 +79,8 @@ namespace ProtivTecheniya
             Console.WriteLine("==============НАСТРОЙКИ==============");
             Console.WriteLine("Введите номер параметра для изменения.");
             Console.WriteLine("1. Пропуск игрового меню при запуске (skipmenu) - " + configurator.Read("skipmenu"));
-            Console.WriteLine("2. Вернуться");
+            Console.WriteLine("2. Выбрать рулсет");
+            Console.WriteLine("3. Вернуться");
             Console.Write("Ваш выбор: ");
             var choice = Console.ReadLine();
             switch (choice)
@@ -91,6 +92,9 @@ namespace ProtivTecheniya
                     Console.WriteLine("Надеюсь, записалось!");
                     return;
                 case "2":
+                    Rulesetator.SetRuleset();
+                    return;
+                case "3":
                     Console.WriteLine("Неправильный выбор, возвращаюсь в игровое меню...");
                     return;
                 default:

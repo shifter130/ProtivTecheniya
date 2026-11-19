@@ -1,3 +1,11 @@
 ﻿// конфигурационный файл игры "против течения"
 // пожалуйста, не редактируйте его (мало ли вы что-то сломаете)
-skipmenu=1
+skipmenu=0
+// ниже идут параметры рулсета. вот их точно не меняйте!!
+jackpot=250
+ostatok=150
+decrspeed=1
+freezeab=false
+atfreezefrom=0
+firstTimer=150
+secondTimer=150
