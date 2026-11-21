@@ -92,7 +92,7 @@ namespace ProtivTecheniya
                 Console.WriteLine("Поздравляем! Вы выиграли " + localbank + " рублей!");
                 Console.WriteLine("Ввведите ваше имя, и мы запишем вас в текстовый файл рекордов!");
                 string username = Console.ReadLine();
-                string cookedstring = DateTime.Now.ToString("dd-MM-yyyy HH:mm") + " >> " + username + " >> " + localbank.ToString() + " рублей." + Environment.NewLine;
+                string cookedstring = DateTime.Now.ToString("dd-MM-yyyy HH:mm") + " >> " + username + " >> " + localbank.ToString() + Sklon(localbank.ToString()) + Environment.NewLine;
                 try
                 {
                     File.AppendAllText("records.txt", cookedstring, Encoding.UTF8);
@@ -130,17 +130,54 @@ namespace ProtivTecheniya
         void TimerAndBank() {
             for (int firstTimer = Rulesetator.firstTimer; firstTimer != 0; firstTimer--) {
                 Thread.Sleep(1000);
-                Console.Title = "Осталось " + firstTimer + " секунд.";
+                Console.Title = "ОСТАВШЕЕСЯ ВРЕМЯ: " + firstTimer + Sklon(firstTimer);
             }
             JackpotFlag = false;
             for (secondTimer = Rulesetator.ostatok; secondTimer != -1; secondTimer -= Rulesetator.decrspeed)
             {
                 Thread.Sleep(1000);
-                Console.Title = "БАНК: " + secondTimer + " рублей!";
+                Console.Title = "БАНК: " + secondTimer + Sklon(Convert.ToString(secondTimer));
             }
             GameOverFlag = true;
             Console.Title = "ВЫ ПРОИГРАЛИ!!!";
             return;
+        }
+
+        string Sklon(string money) {
+            if (money.EndsWith("12") || money.EndsWith("13") || money.EndsWith("14"))
+            {
+                return " рублей!";
+            }
+            else if (money.EndsWith("1") && !money.EndsWith("11"))
+            {
+                return " рубль!";
+            }
+            else if (money.EndsWith("2") || money.EndsWith("3") || money.EndsWith("4")) {
+                return " рубля!";
+            }
+            else {
+                return " рублей!";
+            }
+        }
+
+        string Sklon(int time) {
+            string ttime = Convert.ToString(time);
+            if (ttime.EndsWith("12") || ttime.EndsWith("13") || ttime.EndsWith("14"))
+            {
+                return " секунд!";
+            }
+            else if (ttime.EndsWith("1") && !ttime.EndsWith("11"))
+            {
+                return " секунда!";
+            }
+            else if (ttime.EndsWith("2") || ttime.EndsWith("3") || ttime.EndsWith("4"))
+            {
+                return " секунды!";
+            }
+            else
+            {
+                return " секунд!";
+            }
         }
 
     }
